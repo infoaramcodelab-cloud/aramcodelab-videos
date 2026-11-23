@@ -26,5 +26,6 @@ Chapters
 13:02 Key ideas
 
 Narration: AI voice (Orpheus TTS). Animations: Manim.
+Animation code: https://github.com/infoaramcodelab-cloud/aramcodelab-videos
 
 References: W. Feller, An Introduction to Probability Theory and Its Applications, Vol. I (3rd ed.).
