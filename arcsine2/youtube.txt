@@ -1,0 +1,32 @@
+TITLE
+The Arc Sine Law: Why Fair Games Are So Unfair
+
+DESCRIPTION
+Two players toss a fair coin 1000 times. Surely each is ahead about half of the time? No. The most likely outcome is that one player leads almost the whole game. In this video we run the experiment, find the reason with the reflection trick, derive the exact formula, watch it turn into the arc sine law, and check it with ten lines of Python.
+
+Chapters
+0:00 Eight fair games
+0:24 The puzzle: make a guess
+1:03 The experiment: 10,000 games
+1:39 Why: the reflection trick
+2:10 Games that never return to zero
+2:59 The last tie
+3:49 From bars to a curve: the arc sine law
+4:16 Code Lab: check it in Python
+4:37 What it means
+4:52 Challenge: counting votes
+
+Read and practise on Aram Code Lab (full proofs, exercises, Python you can run in the browser):
+• Paths and the reflection principle (includes the ballot problem from the challenge):
+  https://aramcodelab.pythonanywhere.com/probability-theory/paths-and-the-reflection-principle/
+• Returns to the origin and the main lemma:
+  https://aramcodelab.pythonanywhere.com/probability-theory/random-walks-returns-to-the-origin-and-the-main-lemma/
+• Sojourn times and the arc sine law (proof that the time in the lead has the same distribution):
+  https://aramcodelab.pythonanywhere.com/probability-theory/sojourn-times-and-the-arc-sine-law/
+
+Challenge: A gets 60 votes, B gets 40, counted in random order. What is the probability that A is strictly ahead during the whole count? Post your answer in the comments.
+
+Animations made with Manim in the AramCodeLab style. Narration is AI-generated (synthetic voice); the script, the mathematics and all simulations are our own.
+
+TAGS
+arc sine law, random walk, reflection principle, ballot problem, probability, coin tossing, math visualization, manim, python simulation

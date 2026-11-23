@@ -1,0 +1,30 @@
+Sample Space and Events | Probability Theory 1.1
+
+What counts as a possible outcome? Build discrete sample spaces from dice, three balls
+in three cells, coin tosses, surveys, bridge and a tournament. Then use set operations
+to describe events, prove four identities and check them in Python.
+
+Read the section, work through the problems and run the Python code:
+https://aramcodelab.pythonanywhere.com/probability-theory/sample-space-and-events/?lang=en&utm_source=youtube
+
+Chapters
+0:00 Welcome
+0:36 Why a model first
+1:17 Simple and compound events
+1:55 Sample points and the sample space
+2:40 Three balls in three cells
+4:00 One scheme, many stories
+4:57 Distinguishable or not
+5:34 Sampling: counting smokers
+6:16 Three coins
+6:36 The ages of a couple
+7:23 Bridge and aces
+7:51 The algebra of events
+9:29 Four identities and a trap
+10:32 Discrete spaces and a tournament
+12:26 Code Lab
+13:02 Key ideas
+
+Narration: AI voice (Orpheus TTS). Animations: Manim.
+
+References: W. Feller, An Introduction to Probability Theory and Its Applications, Vol. I (3rd ed.).

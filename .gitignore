@@ -1,0 +1,10 @@
+.venv/
+models/
+media/
+*/media/
+*/audio/*
+!*/audio/durations.json
+*.mp4
+*.wav
+__pycache__/
+.DS_Store

@@ -1,0 +1,13 @@
+# Rendering (Python 3.11+; also needs ffmpeg, Cairo, Pango and a LaTeX distribution, see Manim's install guide)
+manim==0.22.1
+numpy
+pillow
+pygments
+soundfile
+scipy
+# Kokoro voice (bayes, arcsine2): lib/narrate.py voice X
+kokoro-onnx==0.6.1
+# Orpheus voice (course lessons, Apple Silicon): lib/orpheus_voice.py X
+# mlx-audio==0.4.2
+# Narration check with Whisper: lib/asr_check.py X
+# openai-whisper

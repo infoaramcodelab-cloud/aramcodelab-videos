@@ -1,0 +1,25 @@
+TITLE
+A Positive Test: Am I Ill? | Bayes’ Rule
+
+DESCRIPTION
+A hypothetical test catches 99% of people with a condition. Why can a positive result still mean a 50% chance of having it? We test a simulated crowd, count two kinds of positive results, turn the picture into Bayes’ rule, and check it with ten lines of Python. The example is about mathematics, not diagnosis.
+
+Chapters
+0:00 A positive result, a fifty-fifty chance
+0:26 The puzzle: guess the false alarms
+1:02 The experiment: 10,000 people
+1:38 Why: count the positives
+2:26 Bayes’ rule from the picture
+3:17 Code Lab: check it in Python
+4:00 What it means: the base rate
+4:34 Challenge: a rarer condition
+
+Read the worked example and find the challenge answer on Aram Code Lab:
+https://aramcodelab.pythonanywhere.com/articles/positive-test-am-i-ill/
+
+Challenge: The test stays the same, but the condition affects 0.1% of the tested group. Among people with a positive result, how many actually have the condition?
+
+Animations made with Manim in the AramCodeLab style. Narration is AI-generated (synthetic voice).
+
+TAGS
+Bayes rule, conditional probability, base rate, false positives, sensitivity, Python simulation, Manim, math visualization
