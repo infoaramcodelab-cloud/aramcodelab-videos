@@ -1,0 +1,29 @@
+Probabilities in Discrete Sample Spaces | Probability Theory 1.2
+
+Assign probabilities to sample points, compare two models for the same three balls and check coin frequencies.
+Work through event sums, the union formula and Boole's inequality with coins and dice.
+See when counting gives the right answer, then simulate both models in Python.
+
+Read the section, work through the problems and run the Python code:
+https://aramcodelab.pythonanywhere.com/probability-theory/probabilities-in-discrete-sample-spaces/?lang=en&utm_source=youtube
+
+Chapters
+0:00 Welcome
+0:28 Numbers like lengths and masses
+1:32 Same balls, model one
+2:25 Same balls, model two
+3:56 What frequencies say
+4:56 The rules
+5:38 Adding over an event
+6:10 Probability of a union
+7:36 Unions with dice
+8:11 Boole's inequality
+9:13 Equally likely points
+9:44 A trap with two dice
+10:51 Code Lab
+11:27 Key ideas
+
+Narration: AI voice (Orpheus TTS). Animations: Manim.
+Animation code: https://github.com/infoaramcodelab-cloud/aramcodelab-videos
+
+References: W. Feller, An Introduction to Probability Theory and Its Applications, Vol. I (3rd ed.).

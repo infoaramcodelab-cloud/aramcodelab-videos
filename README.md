@@ -8,6 +8,7 @@ solutions and runnable Python code live.
 | Folder | Video | Narration |
 |---|---|---|
 | [`prob01-sample-space/`](prob01-sample-space/) | Probability Theory · Lesson 1: Sample Space and Events (13:47) | Orpheus, Tara |
+| [`prob02-probabilities/`](prob02-probabilities/) | Probability Theory · Lesson 2: Probabilities in Discrete Sample Spaces (12:08) | Orpheus, Tara |
 | [`bayes/`](bayes/) | A positive test: am I ill? | Kokoro |
 | [`arcsine2/`](arcsine2/) | The Arc Sine Law | Kokoro |
 | [`kit_demo/`](kit_demo/) | A short demo of the lesson kit | Kokoro |
@@ -29,6 +30,7 @@ which is committed, so you can render every video without generating the voice.
 
 Shared code is in [`lib/`](lib/):
 - `brand.py`: colours, fonts and the background of the AramCodeLab style;
+- `prob_visuals.py`: probability pictures shared by the course lessons (ball arrangements, dice grids, coins);
 - `lesson_kit.py`: building blocks for course lessons (title card, definition and theorem boxes,
   derivations, code cells with their output, sample-point diagrams, the Key ideas recall card, end card);
 - `narrate.py`: the Kokoro voice, the `Narrated` scene base class, and the final audio mix;

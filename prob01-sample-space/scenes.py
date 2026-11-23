@@ -2,21 +2,20 @@
 
 import sys
 from pathlib import Path
-from itertools import product
 from math import comb
 
 import numpy as np
 from manim import (
     DOWN, LEFT, ORIGIN, RIGHT, UP, Arrow, Circle, Create, DashedLine,
     Difference, Dot, Ellipse, FadeIn, FadeOut, Indicate, Intersection, LaggedStart,
-    Line, MathTex, Polygon, Rectangle, RoundedRectangle, Star, SurroundingRectangle,
+    Line, MathTex, Polygon, Rectangle, RoundedRectangle, SurroundingRectangle,
     Transform, Union, VGroup,
 )
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / 'lib'))
 
-from brand import ACCENT, BG, BORDER2, SURFACE, MUTED, NEXT, TEXT, TEXT2, WARN, axes, card, mono, pill, sans
+from brand import ACCENT, BORDER2, SURFACE, MUTED, NEXT, TEXT, TEXT2, WARN, axes, card, mono, pill, sans
 from data import (
     ARRANGEMENTS, CODE, COIN_TOSSES, EVENTS, EXACTLY_ONE_TAIL, KEY_IDEAS,
     MAJORITY_HEADS, OUTPUT, TOURNAMENT_ENDLESS, TOURNAMENT_FINITE,
@@ -26,11 +25,14 @@ from lesson_kit import (
     inline_text, key_ideas, sample_points, title_card,
 )
 
+from prob_visuals import (
+    arrangement_grid, cells_for, coin_outcome_cards, collapse_arrangements, dice_matrix, formula_pill,
+    tournament_sequences,
+)
+
 DANGER = '#f87171'
 PALE = '#e8eef3'
 SELECTED = '#0f2624'   # tile fill for points in the event
-BALL_COLORS = {'a': ACCENT, 'b': NEXT, 'c': WARN}
-MINI_BALL_RADIUS = 0.185
 SCHEMES = (
     ('Birthdays', 'people', '365 days'),
     ('Dice', 'dice', '6 faces, or a coin → 2'),
@@ -39,69 +41,6 @@ SCHEMES = (
     ('Aces in bridge', '4 aces', '4 players'),
     ('Misprints', 'misprints', 'pages'),
 )
-
-
-def labelled_ball(label, radius, show_label=True):
-    if not show_label:
-        return Star(n=5, outer_radius=radius, color=TEXT2, fill_opacity=0.85, stroke_width=0)
-
-    disc = Circle(radius=radius, color=BALL_COLORS[label], fill_opacity=1, stroke_width=0)
-    reference = mono('Habc', 48, BG, 'BOLD', disable_ligatures=True)
-    cap, x_height, ascender = reference[0], reference[1], reference[2]
-    # One font scale and one baseline for all three glyphs.
-    optical_center = cap.get_bottom()[1] + (x_height.height + ascender.height) / 4
-    letter = reference['abc'.index(label) + 1]
-    letter.shift(LEFT * letter.get_x() + DOWN * optical_center)
-    letter.scale(2 * radius * 0.65 / ascender.height, about_point=ORIGIN)
-    return VGroup(disc, letter)
-
-
-def cells_for(cells, *, compact=False, labelled=True):
-    width, height, radius = (0.405, 1.18, MINI_BALL_RADIUS) if compact else (2.4, 1.55, 0.31)
-    boxes = VGroup(*(card(width, height) for _ in cells)).arrange(RIGHT, buff=0.055 if compact else 0.19)
-    balls = VGroup()
-    spacing = 2.10 if compact else 2.25
-    direction = DOWN if compact else RIGHT
-    for cell, cell_box in zip(cells, boxes, strict=True):
-        for index, label in enumerate(cell):
-            offset = (index - (len(cell) - 1) / 2) * radius * spacing
-            balls.add(labelled_ball(label, radius, labelled).move_to(cell_box).shift(direction * offset))
-    return boxes, balls
-
-
-TILE_CELL = 0.38        # width of one compartment in a 27-grid tile
-TILE_PAD = 0.05
-TILE_HEIGHT = 1.12
-GRID_BALL = 0.16
-
-
-def arrangement(cells, index=None):
-    """One sample point: a closed box with three compartments, numbered underneath.
-    tile[0] = VGroup(frame, dividers), tile[1] = balls, tile[2] = number (when labelled)."""
-    labelled = index is not None
-    width = 3 * TILE_CELL + 2 * TILE_PAD
-    frame = RoundedRectangle(width=width, height=TILE_HEIGHT, corner_radius=0.12, fill_color=SURFACE,
-                             fill_opacity=1, stroke_color=BORDER2, stroke_width=1.6)
-    left = frame.get_left()[0] + TILE_PAD
-    top, bottom = frame.get_top()[1] - 0.10, frame.get_bottom()[1] + 0.10
-    dividers = VGroup(*(Line([left + k * TILE_CELL, bottom, 0], [left + k * TILE_CELL, top, 0],
-                             color=BORDER2, stroke_width=1.2) for k in (1, 2)))
-    balls = VGroup()
-    for k, cell in enumerate(cells):
-        x = left + (k + 0.5) * TILE_CELL
-        for j, label in enumerate(cell):
-            y = frame.get_y() + ((len(cell) - 1) / 2 - j) * GRID_BALL * 2.12
-            balls.add(labelled_ball(label, GRID_BALL, labelled).move_to([x, y, 0]))
-    body = VGroup(VGroup(frame, dividers), balls)
-    if labelled:
-        body.add(mono(f'{index:02d}', 29, MUTED).next_to(frame, DOWN, buff=0.09))
-    return body
-
-
-def arrangement_grid():
-    return VGroup(*(arrangement(row, index) for index, row in ARRANGEMENTS.items())).arrange_in_grid(
-        rows=3, cols=9, buff=(0.22, 0.15),
-    )
 
 
 def die(value):
@@ -122,11 +61,6 @@ def die(value):
 def dice_pair(a, b):
     pair = VGroup(die(a), die(b)).arrange(RIGHT, buff=0.11)
     return VGroup(pair, MathTex(f'({a},{b})', font_size=39, color=TEXT2).next_to(pair, DOWN, buff=0.20))
-
-
-def formula_pill(label, size):
-    text = inline_text(label, size, ACCENT)
-    return VGroup(card(text.width + 0.55, text.height + 0.34).move_to(text), text)
 
 
 def scheme_icons():
@@ -172,35 +106,6 @@ def experiment_card(name, icon):
         label.scale_to_fit_width(tile.width - 0.20)
     label.next_to(tile.get_bottom(), UP, buff=0.32)
     return VGroup(tile, icon.move_to(tile).shift(UP * 0.28), label)
-
-
-def dice_matrix():
-    points = VGroup()
-    for a, b in product(range(1, 7), repeat=2):
-        pair = MathTex(f'({a},{b})', font_size=25, color=TEXT2 if a + b == 6 or a % 2 == b % 2 == 1 else MUTED)
-        marks = VGroup()
-        if a + b == 6:
-            marks.add(RoundedRectangle(width=1.09, height=0.63, corner_radius=0.09,
-                                       color=ACCENT, stroke_width=2.8))
-        if a % 2 == b % 2 == 1:
-            marks.add(Ellipse(width=0.92, height=0.50, color=NEXT, stroke_width=3))
-        square = Rectangle(width=1.10, height=0.64, stroke_width=0)
-        outcome = VGroup(square, pair, marks)
-        points.add(outcome)
-        if (a, b) == (3, 3):
-            intersection = outcome
-    points.arrange_in_grid(rows=6, cols=6, buff=(0.21, 0.08))
-    labels = VGroup(pill('Sum is six', ACCENT, 31), pill('Both faces odd', NEXT, 31)).arrange(RIGHT, buff=0.35)
-    return VGroup(labels, points).arrange(DOWN, buff=0.34), intersection
-
-
-def coin_outcome_cards():
-    tiles = VGroup()
-    for outcome in COIN_TOSSES:
-        tile = card(2.30, 1.25)
-        tiles.add(VGroup(tile, mono(outcome, 54, TEXT).move_to(tile)))
-    tiles.arrange_in_grid(rows=2, cols=4, buff=(0.34, 0.30))
-    return tiles
 
 
 def bridge_hands(ace_counts):
@@ -485,7 +390,7 @@ class Video(LessonScene):
             self.show(inline_text(r'Define $\Omega$ before assigning probabilities.', 47))
 
     def arrange_balls(self):
-        grid = arrangement_grid()
+        grid = arrangement_grid(ARRANGEMENTS)
         status = pill('27 distinct arrangements', ACCENT, 38)
         display = VGroup(grid, status).arrange(DOWN, buff=0.38)
         with self.seg('cells') as g:
@@ -566,61 +471,7 @@ class Video(LessonScene):
             ).arrange(DOWN, buff=0.43))
 
         with self.seg('collapse') as g:
-            grid = arrangement_grid()
-            note = pill('27 distinguishable arrangements', ACCENT, 37)
-            self.show(VGroup(grid, note).arrange(DOWN, buff=0.38))
-            self.wait(g.left() * 0.16)
-            swaps = []
-            for tile in grid:
-                for ball in tile[1]:
-                    star = labelled_ball('*', MINI_BALL_RADIUS, False).match_height(ball).move_to(ball)
-                    swaps.append(Transform(ball, star))
-            self.play(*swaps, run_time=0.90)
-            self.play(*(tile[2].animate.set_opacity(0) for tile in grid), run_time=0.55)
-
-            stacks = {}
-            for cells, tile in zip(ARRANGEMENTS.values(), grid, strict=True):
-                tile.remove(tile[2])
-                stacks.setdefault(tuple(map(len, cells)), []).append(tile)
-
-            patterns = sorted(stacks, key=lambda pattern: (len(stacks[pattern]), pattern))
-            targets, badges, slots = {}, VGroup(), VGroup()
-            for pattern in patterns:
-                front = stacks[pattern][-1].copy()
-                badge = pill(f'×{len(stacks[pattern])}', ACCENT, 29).next_to(front, DOWN, buff=0.20)
-                targets[pattern] = front
-                badges.add(badge)
-                slots.add(VGroup(front, badge))
-            slots.arrange_in_grid(rows=2, cols=5, buff=(0.78, 0.40))
-            slots.next_to(note, UP, buff=0.43).set_x(grid.get_x())
-
-            moves = []
-            for pattern in patterns:
-                center = targets[pattern].get_center()
-                for depth, tile in enumerate(stacks[pattern]):
-                    tile.set_z_index(depth)
-                    offset = (len(stacks[pattern]) - 1 - depth) * (RIGHT * 0.045 + UP * 0.052)
-                    moves.append(tile.animate.move_to(center + offset))
-            self.play(*moves, run_time=2.25)
-            self.play(FadeIn(badges), run_time=0.60)
-            self.wait(g.left() * 0.18)
-
-            check = formula_pill(r'$3\cdot1+6\cdot3+1\cdot6=27$', 39).move_to(note)
-            self.play(Transform(note, check), run_time=0.60)
-            self.wait(g.left() * 0.35)
-
-            fronts = VGroup()
-            collapse = []
-            for members in stacks.values():
-                front = members[-1]
-                fronts.add(front)
-                collapse.extend(tile.animate.move_to(front).set_opacity(0) for tile in members[:-1])
-            self.play(*collapse, run_time=1.00)
-            replacement = pill('27 → 10 configurations', ACCENT, 37).move_to(note)
-            self.play(Transform(note, replacement), run_time=0.55)
-            self.remove(grid, *grid, badges, note)
-            self.body = VGroup(fronts, badges, note)
-            self.add(self.body)
+            collapse_arrangements(self, ARRANGEMENTS, g)
         with self.seg('model_choice'):
             pass
 
@@ -667,7 +518,7 @@ class Video(LessonScene):
 
     def three_coins(self):
         with self.seg('three_coins'):
-            tiles = coin_outcome_cards()
+            tiles = coin_outcome_cards(COIN_TOSSES)
             more_heads = pill('Two or more heads', ACCENT, 36)
             one_tail = pill('Exactly one tail', NEXT, 36)
             legend = VGroup(more_heads, one_tail).arrange(RIGHT, buff=0.34).next_to(tiles, DOWN, buff=0.50)
@@ -775,7 +626,7 @@ class Video(LessonScene):
             self.event_view(EventDiagram(nested=True), r'$A\subset B$ · every point of $A$ also belongs to $B$',
                             lambda a, b: a)
         with self.seg('coin_implies'):
-            tiles = coin_outcome_cards()
+            tiles = coin_outcome_cards(COIN_TOSSES)
             teal = VGroup(*(SurroundingRectangle(tile, color=ACCENT, buff=0.06, corner_radius=0.16)
                             for outcome, tile in zip(COIN_TOSSES, tiles, strict=True) if outcome in MAJORITY_HEADS))
             indigo = VGroup(*(RoundedRectangle(width=tile.width - 0.27, height=tile.height - 0.22,
@@ -916,7 +767,7 @@ class Video(LessonScene):
                 self.play(Indicate(columns[side][1][1][index], color=ACCENT, scale_factor=1.13), run_time=0.67)
         with self.seg('tournament_endless'):
             title = sans('Two endless outcomes', 50, TEXT, 'BOLD')
-            rows = VGroup(*(mono(outcome, 54, NEXT) for outcome in TOURNAMENT_ENDLESS)).arrange(DOWN, buff=0.28)
+            rows = tournament_sequences(TOURNAMENT_ENDLESS)
             self.show(VGroup(title, rows).arrange(DOWN, buff=0.55), run_time=0.55)
         with self.seg('tournament_list') as g:
             ordered = (*TOURNAMENT_ENDLESS, 'aa', 'bb', 'acc', 'bcc', 'acbb', 'bcaa')
