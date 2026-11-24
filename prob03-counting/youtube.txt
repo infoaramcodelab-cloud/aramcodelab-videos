@@ -1,0 +1,30 @@
+The Multiplication Rule and Ordered Samples | Probability Theory 2.1
+
+Use the multiplication rule to count pairs, successive choices and arrangements.
+Compare ordered samples with and without replacement, then compute probabilities of no repetition.
+Work through the birthday problem and check the exact answer with a Python simulation.
+
+Read the section, work through the problems and run the Python code:
+https://aramcodelab.pythonanywhere.com/probability-theory/the-multiplication-rule-and-ordered-samples/?lang=en&utm_source=youtube
+
+Chapters
+0:00 Welcome
+0:32 Counting pairs
+1:05 Successive choices
+1:57 Cards, lamps, balls and dice
+3:03 Flags on poles
+3:43 Ordered samples
+4:42 Permutations
+5:04 Letters and pieces of type
+5:37 Random samples
+6:19 Will a particular element appear?
+7:13 No repetition
+8:00 Accidents, dice and elevators
+9:00 The birthday problem
+10:37 Code Lab
+11:14 Key ideas
+
+Narration: AI voice (Orpheus TTS). Animations: Manim.
+Animation code: https://github.com/infoaramcodelab-cloud/aramcodelab-videos
+
+References: W. Feller, An Introduction to Probability Theory and Its Applications, Vol. I (3rd ed.).
