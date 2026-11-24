@@ -10,6 +10,7 @@ solutions and runnable Python code live.
 | [`prob01-sample-space/`](prob01-sample-space/) | Probability Theory · Lesson 1: Sample Space and Events (13:47) | Orpheus, Tara |
 | [`prob02-probabilities/`](prob02-probabilities/) | Probability Theory · Lesson 2: Probabilities in Discrete Sample Spaces (12:08) | Orpheus, Tara |
 | [`prob03-counting/`](prob03-counting/) | Probability Theory · Lesson 3: The Multiplication Rule and Ordered Samples (11:57) | Orpheus, Tara |
+| [`prob04-subpopulations/`](prob04-subpopulations/) | Probability Theory · Lesson 4: Subpopulations and Partitions (11:52) | Orpheus, Tara |
 | [`bayes/`](bayes/) | A positive test: am I ill? | Kokoro |
 | [`arcsine2/`](arcsine2/) | The Arc Sine Law | Kokoro |
 | [`kit_demo/`](kit_demo/) | A short demo of the lesson kit | Kokoro |

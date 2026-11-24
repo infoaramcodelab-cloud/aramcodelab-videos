@@ -1,0 +1,29 @@
+Subpopulations and Partitions | Probability Theory 2.2
+
+Count unordered selections using binomial coefficients, from poker hands to paths on a grid.
+Use partitions to count bridge deals and rolls where every die face appears exactly twice.
+Compare four sampling models and check the bridge ace probability with a Python simulation.
+
+Read the section, work through the problems and run the Python code:
+https://aramcodelab.pythonanywhere.com/probability-theory/subpopulations-and-partitions/?lang=en&utm_source=youtube
+
+Chapters
+0:00 Welcome
+0:45 Forgetting the order
+1:37 Choosing who stays
+2:14 Poker ranks and suits
+3:16 The senators' committee
+4:30 Exactly k balls in one cell
+5:23 Arrangements of two kinds
+6:13 Shortest paths
+7:05 Partitions into labelled groups
+7:57 An ace for each bridge player
+8:43 Each die face exactly twice
+9:26 Four ways to sample
+10:30 Code Lab
+11:08 Key ideas
+
+Narration: AI voice (Orpheus TTS). Animations: Manim.
+Animation code: https://github.com/infoaramcodelab-cloud/aramcodelab-videos
+
+References: W. Feller, An Introduction to Probability Theory and Its Applications, Vol. I (3rd ed.).
