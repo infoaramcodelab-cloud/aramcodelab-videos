@@ -1,0 +1,29 @@
+Occupancy Problems and the Three Statistics | Probability Theory 3.1
+
+Count how balls fill labelled cells with stars and bars, from dice rolls to partial derivatives.
+Compare Maxwell–Boltzmann, Bose–Einstein and Fermi–Dirac probabilities for the same arrangement.
+Count runs at a lunch counter and check the most likely seven-ball pattern with a Python simulation.
+
+Read the section, work through the problems and run the Python code:
+https://aramcodelab.pythonanywhere.com/probability-theory/occupancy-problems-and-the-three-statistics/?lang=en&utm_source=youtube
+
+Chapters
+0:00 Welcome
+0:41 Occupancy numbers
+1:34 Stars and bars
+2:29 No empty cells
+3:12 Dice and derivatives
+4:03 Labelled balls and probability
+4:48 Count cells, then count balls
+5:42 All fifteen configurations
+6:24 The three statistics
+7:21 One pattern, three probabilities
+8:04 Runs
+8:50 The lunch counter
+9:53 Code Lab
+10:32 Key ideas
+
+Narration: AI voice (Orpheus TTS). Animations: Manim.
+Animation code: https://github.com/infoaramcodelab-cloud/aramcodelab-videos
+
+References: W. Feller, An Introduction to Probability Theory and Its Applications, Vol. I (3rd ed.).
